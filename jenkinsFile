@@ -13,11 +13,8 @@ tools {
                 bat 'dir'
             }
         }
-        stage('Compile') {
-            steps {
-                bat 'javac -d out src/Main.java src/MainTest.java'
-            }
-        }
+      
+        
         stage('Test') {
             steps {
                 bat 'java -classpath out;lib/* MainTest'
