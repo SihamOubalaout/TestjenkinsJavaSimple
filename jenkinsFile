@@ -15,12 +15,12 @@ tools {
         }
         stage('Compile') {
             steps {
-                bat 'javac -d out src/Main.java'
+                bat 'javac -d out src/Main.java src/MainTest.java'
             }
         }
         stage('Test') {
             steps {
-                bat 'java -classpath lib/*;out MainTest' // Note the use of ';' to separate paths in Windows
+                bat 'java -classpath out;lib/* MainTest'
             }
         }
         stage('Run') {
@@ -43,3 +43,4 @@ tools {
         }
     }
 }
+
