@@ -17,7 +17,7 @@ tools {
         
         stage('Test') {
             steps {
-                bat 'java -classpath out;lib/* MainTest'
+                bat 'java -classpath out;lib/* MainTest.java'
             }
         }
         stage('Run') {
