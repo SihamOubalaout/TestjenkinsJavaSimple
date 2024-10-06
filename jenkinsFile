@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('List files') {
-            steps {
-                bat 'dir'
-            }
-        }
         stage('Compile') {
             steps {
                 bat 'javac -d out src/Main.java'
