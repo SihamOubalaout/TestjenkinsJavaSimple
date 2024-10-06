@@ -1,43 +1,35 @@
 pipeline {
     agent any
-tools {
-        jdk 'JDK17'  
-    }
-    environment {
-        PATH = "C:\\WINDOWS\\SYSTEM32"
-    }
 
     stages {
-        stage('List files') {
+        stage('Checkout') {
             steps {
-                bat 'dir'
+                git url: 'https://github.com/SihamOubalaout/TestjenkinsJavaSimple.git', branch: 'main'
             }
         }
-      
-        
-        stage('Test') {
+
+        stage('Display Message') {
+                    steps {
+                        // Display a message indicating successful Git checkout
+                        echo 'Git checkout successful! Repository cloned.'
+                    }
+                }
+
+        stage('Build') {
             steps {
-                bat 'java -classpath out;lib/* MainTest.java'
+                bat 'mvn clean install'
             }
         }
-        stage('Run') {
-            steps {
-                bat 'java -cp out Main'
-            }
-        }
+
+        stage('mvn clean package successful passed') {
+                    steps {
+                        // Display a message indicating successful Git checkout
+                        echo 'mvn clean install!'
+                    }
+                }
+
+
     }
 
-    post {
-        always {
-            echo 'Pipeline completed.'
-            archiveArtifacts artifacts: 'out/*.class', allowEmptyArchive: true
-        }
-        success {
-            echo 'Build and tests were successful!'
-        }
-        failure {
-            echo 'There was an error in the pipeline.'
-        }
-    }
+    //comment test
 }
-
