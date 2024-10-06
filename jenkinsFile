@@ -1,7 +1,16 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "C:\\WINDOWS\\SYSTEM32"
+    }
+
     stages {
+        stage('List files') {
+            steps {
+                bat 'dir'
+            }
+        }
         stage('Compile') {
             steps {
                 bat 'javac -d out src/Main.java'
@@ -9,7 +18,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'java -classpath lib/* src/MainTest.java'
+                bat 'java -classpath lib/*;out MainTest' // Note the use of ';' to separate paths in Windows
             }
         }
         stage('Run') {
